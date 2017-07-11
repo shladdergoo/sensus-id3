@@ -19,7 +19,7 @@ class ID3TagRepository implements IID3TageRepository {
 
         let nodeId3 = require("node-id3");
 
-        let  tags = {
+        let tags = {
             artist: artistValue
         };
 
