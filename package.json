@@ -1,7 +1,7 @@
 {
-  "name": "node-insult",
-  "version": "1.0.0",
-  "description": "REST api for serving insults",
+  "name": "sensus-id3",
+  "version": "0.0.1",
+  "description": "",
   "homepage": "",
   "author": {
     "name": "James Fox",

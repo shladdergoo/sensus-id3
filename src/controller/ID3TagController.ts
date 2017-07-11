@@ -2,7 +2,7 @@
 import * as express from "express";
 
 import { inject, injectable } from "inversify";
-import { Controller, Get, interfaces } from "inversify-express-utils";
+import { Controller, Get, Post, Put, interfaces } from "inversify-express-utils";
 import "reflect-metadata";
 
 import IID3TagService from "../interface/IID3TagService";
@@ -19,8 +19,14 @@ export class ID3TagController implements interfaces.Controller {
     }
 
     @Get("/")
-    public index(req: express.Request): boolean {
-        return this._id3TagService.WriteArtist("foo", "bar");
+    public index(req: express.Request): string {
+        return "v0.0.1";
+    }
+
+    @Put("/:filename/artist/:artistValue")
+    public writeArtist(req: express.Request): boolean {
+        return this._id3TagService.WriteArtist(req.params.filename,
+            req.params.artistValue);
     }
 }
 
