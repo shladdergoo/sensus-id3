@@ -14,7 +14,7 @@ class ID3TagRepository implements IID3TageRepository {
             artist: artistValue
         };
 
-        let result = nodeId3.write(filename, tags);
+        let result = nodeId3.write(tags, filename);
 
         return result;
     }
