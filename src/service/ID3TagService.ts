@@ -16,6 +16,11 @@ class ID3TagService implements IID3TagService {
         this._id3TagRepository = id3TagRepository;
     }
 
+    public ReadArtist(filename: string): string {
+
+        return this._id3TagRepository.ReadArtist(filename);
+    }
+
     public WriteArtist(filename: string, artistValue: string): boolean {
 
         return this._id3TagRepository.WriteArtist(filename, artistValue);

@@ -28,6 +28,11 @@ export class ID3TagController implements interfaces.Controller {
         return this._id3TagService.WriteArtist(req.params.filename,
             req.params.artistValue);
     }
+
+    @Get("/:filename/artist/")
+    public readArtist(req: express.Request): string {
+        return this._id3TagService.ReadArtist(req.params.filename);
+    }
 }
 
 export default ID3TagController;
