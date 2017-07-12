@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import "reflect-metadata";
 
-import IID3TageRepository from "../interface/iid3TagRepository";
+import IID3TagRepository from "../interface/IID3TagRepository";
 
 @injectable()
-class ID3TagRepository implements IID3TageRepository {
+class ID3TagRepository implements IID3TagRepository {
 
     public ReadArtist(filename: string): string {
 
