@@ -6,6 +6,7 @@ import { Controller, Get, Post, Put, interfaces } from "inversify-express-utils"
 import "reflect-metadata";
 
 import IID3TagService from "../interface/IID3TagService";
+import TagResult from "../model/TagResult";
 import Types from "../types";
 
 @Controller("/id3tag")
@@ -24,14 +25,26 @@ export class ID3TagController implements interfaces.Controller {
     }
 
     @Put("/:filename/artist/:artistValue")
-    public writeArtist(req: express.Request): boolean {
-        return this._id3TagService.WriteArtist(req.params.filename,
+    public writeArtist(req: express.Request): TagResult {
+
+        let result: boolean;
+
+        result = this._id3TagService.WriteArtist(req.params.filename,
             req.params.artistValue);
+
+        return { returnValue: null, success: result };
     }
 
     @Get("/:filename/artist/")
-    public readArtist(req: express.Request): string {
-        return this._id3TagService.ReadArtist(req.params.filename);
+    public readArtist(req: express.Request): TagResult {
+
+        let result: string;
+
+        result = this._id3TagService.ReadArtist(req.params.filename);
+
+        let success = !(result === null);
+
+        return { returnValue: result, success: success };
     }
 }
 

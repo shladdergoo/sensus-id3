@@ -10,7 +10,12 @@ class ID3TagRepository implements IID3TageRepository {
 
         let nodeId3 = require("node-id3");
 
-        let tags = nodeId3.read(filename);
+        let tags;
+        try {
+            tags = nodeId3.read(filename);
+        } catch (error) {
+            return null;
+        }
 
         return tags.artist;
     }
@@ -24,8 +29,11 @@ class ID3TagRepository implements IID3TageRepository {
         };
 
         let result = nodeId3.write(tags, filename);
+        if (result === true) {
+            return result;
+        }
 
-        return result;
+        return false;
     }
 }
 
