@@ -3,8 +3,15 @@ import "reflect-metadata";
 
 import IID3TagRepository from "../interface/IID3TagRepository";
 
+import TagBag from "../model/TagBag";
+
 @injectable()
 class ID3TagRepository implements IID3TagRepository {
+
+    public ReadTags(filename: string): TagBag {
+
+        return null;
+    }
 
     public ReadArtist(filename: string): string {
 

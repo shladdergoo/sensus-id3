@@ -8,6 +8,8 @@ import IID3TagRepository from "../src/interface/IID3TagRepository";
 import IID3TagService from "../src/interface/IID3TagService";
 import ID3TagService from "../src/service/ID3TagService";
 
+import TagBag from "../src/model/TagBag";
+
 const expect = chai.expect;
 
 describe("ID3TagService", () => {
@@ -26,6 +28,59 @@ describe("ID3TagService", () => {
             sut.WriteArtist("foo", "bar");
 
             expect((<sinon.SinonStub>repositoryMock.WriteArtist).calledOnce).to.be.true;
+        });
+    });
+
+    describe("ReadTagsDirectory", () => {
+
+        it("should return null when no files found (null)", () => {
+
+            fileSystemMock.GetDirectoryFiles = sinon.stub().returns(null)
+
+            let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
+
+            let result = sut.ReadTagsDirectory("foo");
+
+            expect(result).to.be.null;
+        });
+
+        it("should return null when no files found (empty)", () => {
+
+            fileSystemMock.GetDirectoryFiles = sinon.stub().returns([]);
+
+            let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
+
+            let result = sut.ReadTagsDirectory("foo");
+
+            expect(result).to.be.null;
+        });
+
+        it("should get tags when files found", () => {
+
+            let files = ["foo", "bar"];
+            fileSystemMock.GetDirectoryFiles = sinon.stub().returns(files);
+            repositoryMock.ReadTags = sinon.stub().returns(new Array<TagBag>());
+
+            let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
+
+            let result = sut.ReadTagsDirectory("foo");
+
+            expect((<sinon.SinonStub>repositoryMock.ReadTags).callCount).to.equal(2);
+        });
+
+        it("should return tags when files found", () => {
+
+            let files = ["foo", "bar"];
+            fileSystemMock.GetDirectoryFiles = sinon.stub().returns(files);
+            let tags = new Array<TagBag>();
+            repositoryMock.ReadTags = sinon.stub().returns(tags);
+
+            let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
+
+            let result = sut.ReadTagsDirectory("foo");
+
+            expect(result).to.not.be.null;
+            expect(result.length).to.equal(2);
         });
     });
 });

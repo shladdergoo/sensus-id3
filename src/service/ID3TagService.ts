@@ -6,6 +6,8 @@ import IFileSystem from "../interface/IFileSystem";
 import IID3TagRepository from "../interface/IID3TagRepository";
 import IID3TagService from "../interface/IID3TagService";
 
+import TagBag from "../model/TagBag";
+
 import Types from "../types";
 
 @injectable()
@@ -21,14 +23,36 @@ class ID3TagService implements IID3TagService {
         this._fileSystem = fileSystem;
     }
 
+    public ReadTags(filename: string): TagBag {
+
+        return null;
+    }
+
     public ReadArtist(filename: string): string {
 
         return this._id3TagRepository.ReadArtist(filename);
     }
 
+    public ReadTagsDirectory(directory: string): TagBag[] {
+
+        let files: string[];
+        files = this._fileSystem.GetDirectoryFiles(directory);
+
+        if (files === null || files.length === 0) {
+            return null;
+        }
+
+        return this.GetFilesTags(files);
+    }
+
     public ReadArtistDirectory(directory: string): string[] {
 
         return null;
+    }
+
+    public WriteTags(filename: string, tags: TagBag): boolean {
+
+        return false;
     }
 
     public WriteArtist(filename: string, artistValue: string): boolean {
@@ -39,6 +63,21 @@ class ID3TagService implements IID3TagService {
     public WriteArtistDirectory(directory: string, artistValue: string): boolean {
 
         return null;
+    }
+
+    private GetFilesTags(files: string[]): TagBag[] {
+
+        let tagBag = new Array<TagBag>();
+
+        files.forEach(file => {
+
+            let tags = this._id3TagRepository.ReadTags(file);
+            // if (tags !== null) {
+                tagBag.push(tags);
+            // }
+        });
+
+        return tagBag;
     }
 }
 

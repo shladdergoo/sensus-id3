@@ -1,7 +1,11 @@
+import TagBag from "../model/TagBag";
+
 interface IID3TagService {
+    ReadTags(filename: string): TagBag;
     ReadArtist(filename: string): string;
+    WriteTags(filename: string, tags: TagBag): boolean;
     WriteArtist(filename: string, artistValue: string): boolean;
-    ReadArtistDirectory(directory: string): string[];
+    ReadTagsDirectory(directory: string): TagBag[];
     WriteArtistDirectory(directory: string, artistValue: string): boolean;
 }
 
