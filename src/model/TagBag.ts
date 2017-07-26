@@ -1,7 +1,9 @@
+import Tag from "./TagBag";
+
 export class TagBag {
 
-    public tagName: string;
-    public tagValue: string;
+    public filename: string;
+    public tags: Tag[];
 };
 
 export default TagBag;
