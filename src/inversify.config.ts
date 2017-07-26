@@ -1,6 +1,6 @@
 import { Container } from "inversify";
 
-import { Controller, TYPE, interfaces } from "inversify-express-utils";
+import { TYPE, interfaces } from "inversify-express-utils";
 
 import IFileSystem from "./interface/IFileSystem";
 import IID3TagRepository from "./interface/IID3TagRepository";
