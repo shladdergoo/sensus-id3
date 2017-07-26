@@ -8,6 +8,7 @@ import "reflect-metadata";
 import IID3TagService from "../interface/IID3TagService";
 
 import DirectoryResult from "../model/DirectoryResult";
+import TagBag from "../model/TagBag";
 import TagResult from "../model/TagResult";
 
 import Types from "../types";
@@ -36,13 +37,25 @@ export class ID3TagController implements interfaces.Controller {
         result = this._id3TagService.WriteArtist(req.params.filename,
             req.params.artistValue);
 
-        return { returnValue: null, success: result };
+        return { returnValue: null, success: result, tags: null };
     }
 
     @Put("/dir/:directory/artist/:artistValue")
     public writeArtistDirectory(req: express.Request): DirectoryResult {
 
         return null;
+    }
+
+    @Get("/:filename/tags")
+    public readTags(req: express.Request): TagResult {
+
+        let result: TagBag;
+
+        result = this._id3TagService.ReadTags(req.params.filename);
+
+        let success = !(result === null);
+
+        return { returnValue: null, success: success, tags: result };
     }
 
     @Get("/:filename/artist")
@@ -54,7 +67,7 @@ export class ID3TagController implements interfaces.Controller {
 
         let success = !(result === null);
 
-        return { returnValue: result, success: success };
+        return { returnValue: result, success: success, tags: null };
     }
 
     @Get("/dir/:directory/artist")

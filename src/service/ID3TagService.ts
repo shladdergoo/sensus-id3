@@ -25,7 +25,7 @@ class ID3TagService implements IID3TagService {
 
     public ReadTags(filename: string): TagBag {
 
-        return null;
+        return this._id3TagRepository.ReadTags(filename);
     }
 
     public ReadArtist(filename: string): string {
