@@ -1,4 +1,4 @@
-import Tag from "./TagBag";
+import Tag from "./Tag";
 
 export class TagBag {
 
