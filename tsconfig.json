@@ -21,7 +21,8 @@
   },
   "include": [
     "src/**/*",
-    "test/**/*"
+    "test/**/*",
+    "test-integration/**/*"
   ],
   "exclude": [
     "node_modules"
