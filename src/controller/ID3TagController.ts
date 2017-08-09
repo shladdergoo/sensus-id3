@@ -25,8 +25,10 @@ export class ID3TagController implements interfaces.Controller {
     }
 
     @Get("/")
-    public index(req: express.Request): string {
-        return "v0.0.1";
+    public index(req: express.Request, res: express.Response) {
+
+        res.setHeader("Content-Type", "application/json");
+        res.send(JSON.stringify({ version: "0.0.1" }));
     }
 
     @Put("/:filename/artist/:artistValue")
