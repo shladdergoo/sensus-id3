@@ -31,3 +31,7 @@ TODO: Write credits
 ## License
 
 Apache-2.0 © 2017 [James Fox]()
+
+KB
+
+https://www.sitepoint.com/promises-in-javascript-unit-tests-the-definitive-guide/
