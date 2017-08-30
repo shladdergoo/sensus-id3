@@ -1,24 +1,30 @@
 {
-  "version": "0.1.0",
-  "command": "gulp",
-  "isShellCommand": true,
-  "args": [
-    "--no-color"
-  ],
-  "tasks": [
-    {
-      "taskName": "build",
-      "isBuildCommand": true
-    },
-    {
-      "taskName": "clean"
-    },
-    {
-      "taskName": "lint"
-    },
-    {
-      "taskName": "test",
-      "isTestCommand": true
-    }
-  ]
+    "version": "0.1.0",
+    "command": "gulp",
+    "isShellCommand": true,
+    "args": [
+        "--no-color"
+    ],
+    "tasks": [
+        {
+            "taskName": "build",
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "build_full"
+        },
+        {
+            "taskName": "npm_install"
+        },
+        {
+            "taskName": "clean"
+        },
+        {
+            "taskName": "lint"
+        },
+        {
+            "taskName": "test",
+            "isTestCommand": true
+        }
+    ]
 }
