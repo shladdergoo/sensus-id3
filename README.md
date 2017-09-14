@@ -12,6 +12,11 @@ TODO: Describe the installation process
 
 TODO: Write usage instructions
 
+## Tests
+
+gulp test
+npm run jest
+
 ## Contributing
 
 1. Fork it!
@@ -35,5 +40,7 @@ Apache-2.0 © 2017 [James Fox]()
 KB
 
 https://www.sitepoint.com/promises-in-javascript-unit-tests-the-definitive-guide/
+
 https://www.npmjs.com/package/gulp-jest
+https://github.com/facebook/jest.git
 
