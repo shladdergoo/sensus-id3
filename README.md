@@ -43,4 +43,4 @@ https://www.sitepoint.com/promises-in-javascript-unit-tests-the-definitive-guide
 
 https://www.npmjs.com/package/gulp-jest
 https://github.com/facebook/jest.git
-
+https://garethevans.com/2016/06/14/react-jest-typescript-and-visual-studio-code-on-windows/
