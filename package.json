@@ -54,7 +54,7 @@
         "sinon": "^1.17.7",
         "ts-node": "^1.7.3",
         "tslint": "3.14.0-dev.1",
-        "typescript": "2.4.2"
+        "typescript": "^2.5.2"
     },
     "eslintConfig": {
         "extends": "xo-space",
