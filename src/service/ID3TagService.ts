@@ -36,7 +36,7 @@ class ID3TagService implements IID3TagService {
     public ReadTagsDirectory(directory: string): TagBag[] {
 
         let files: string[];
-        files = this._fileSystem.GetDirectoryFiles(directory);
+        files = this._fileSystem.GetDirectoryFilesSync(directory);
 
         if (files === null || files.length === 0) {
             return null;

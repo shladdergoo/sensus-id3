@@ -35,7 +35,7 @@ describe("ID3TagService", () => {
 
         it("should return null when no files found (null)", () => {
 
-            fileSystemMock.GetDirectoryFiles = sinon.stub().returns(null)
+            fileSystemMock.GetDirectoryFilesSync = sinon.stub().returns(null)
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
@@ -46,7 +46,7 @@ describe("ID3TagService", () => {
 
         it("should return null when no files found (empty)", () => {
 
-            fileSystemMock.GetDirectoryFiles = sinon.stub().returns([]);
+            fileSystemMock.GetDirectoryFilesSync = sinon.stub().returns([]);
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
@@ -58,7 +58,7 @@ describe("ID3TagService", () => {
         it("should get tags when files found", () => {
 
             let files = ["foo", "bar"];
-            fileSystemMock.GetDirectoryFiles = sinon.stub().returns(files);
+            fileSystemMock.GetDirectoryFilesSync = sinon.stub().returns(files);
             repositoryMock.ReadTags = sinon.stub().returns(new Array<TagBag>());
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
@@ -71,7 +71,7 @@ describe("ID3TagService", () => {
         it("should return tags when files found", () => {
 
             let files = ["foo", "bar"];
-            fileSystemMock.GetDirectoryFiles = sinon.stub().returns(files);
+            fileSystemMock.GetDirectoryFilesSync = sinon.stub().returns(files);
             let tags = new Array<TagBag>();
             repositoryMock.ReadTags = sinon.stub().returns(tags);
 

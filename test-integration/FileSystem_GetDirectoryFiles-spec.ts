@@ -13,7 +13,7 @@ describe("FileSystem", () => {
 
             let sut = new FileSystem();
 
-            let result = sut.GetDirectoryFiles("D:\\temp");
+            let result = sut.GetDirectoryFilesSync("D:\\temp");
 
             expect(result).to.not.be.undefined;
             expect(result).to.not.be.null;

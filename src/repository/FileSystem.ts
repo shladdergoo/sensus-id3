@@ -8,7 +8,7 @@ import * as fs from "fs";
 @injectable()
 class FileSystem implements IFileSystem {
 
-    public GetDirectoryFiles(directory: string): string[] {
+    public GetDirectoryFilesSync(directory: string): string[] {
 
         return fs.readdirSync(directory);
     }
