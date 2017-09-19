@@ -5,7 +5,7 @@ interface IID3TagService {
     ReadArtist(filename: string): string;
     WriteTags(filename: string, tags: TagBag): boolean;
     WriteArtist(filename: string, artistValue: string): boolean;
-    ReadTagsDirectory(directory: string): TagBag[];
+    ReadTagsDirectorySync(directory: string): TagBag[];
     WriteArtistDirectory(directory: string, artistValue: string): boolean;
 }
 
