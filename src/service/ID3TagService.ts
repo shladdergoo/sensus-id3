@@ -33,6 +33,20 @@ class ID3TagService implements IID3TagService {
         return this._id3TagRepository.ReadArtist(filename);
     }
 
+    public ReadTagsDirectory(directory: string, callback: (response: TagBag[]) => void): void {
+
+        this._fileSystem.GetDirectoryFiles(directory, (err, files) => {
+
+            if (err) { throw err; }
+
+            if (files === null || files.length === 0) {
+                callback(null);
+            } else {
+                callback(this.GetFilesTags(files));
+            }
+        });
+    }
+
     public ReadTagsDirectorySync(directory: string): TagBag[] {
 
         let files: string[];
@@ -72,9 +86,9 @@ class ID3TagService implements IID3TagService {
         files.forEach(file => {
 
             let tags = this._id3TagRepository.ReadTags(file);
-            // if (tags !== null) {
+            if (tags !== null) {
                 tagBag.push(tags);
-            // }
+            }
         });
 
         return tagBag;
