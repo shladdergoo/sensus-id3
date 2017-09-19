@@ -31,7 +31,7 @@ describe("ID3TagService", () => {
         });
     });
 
-    describe("ReadTagsDirectory", () => {
+    describe("ReadTagsDirectorySync", () => {
 
         it("should return null when no files found (null)", () => {
 
