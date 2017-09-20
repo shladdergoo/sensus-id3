@@ -38,11 +38,6 @@ class ID3TagService implements IID3TagService {
         });
     }
 
-    public ReadArtist(filename: string): string {
-
-        return this._id3TagRepository.ReadArtist(filename);
-    }
-
     public ReadTagsDirectory(directory: string, callback: (response: TagBag[]) => void): void {
 
         this._fileSystem.GetDirectoryFiles(directory, (err, files) => {

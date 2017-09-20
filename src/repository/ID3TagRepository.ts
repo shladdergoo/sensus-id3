@@ -63,18 +63,6 @@ class ID3TagRepository implements IID3TagRepository {
         return ID3TagRepository.BuildTagBag(filename, tags);
     }
 
-    public ReadArtist(filename: string): string {
-
-        let tags;
-        try {
-            tags = this._nodeId3.read(filename);
-        } catch (error) {
-            return null;
-        }
-
-        return tags.artist;
-    }
-
     public WriteArtist(filename: string, artistValue: string): boolean {
 
         let tags = {

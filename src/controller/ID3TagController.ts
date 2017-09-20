@@ -60,24 +60,6 @@ export class ID3TagController implements interfaces.Controller {
             res.send(JSON.stringify(tagResult));
         });
     }
-
-    @Get("/:filename/artist")
-    public readArtist(req: express.Request): TagResult {
-
-        let result: string;
-
-        result = this._id3TagService.ReadArtist(req.params.filename);
-
-        let success = !(result === null);
-
-        return { returnValue: result, success: success, tags: null };
-    }
-
-    @Get("/dir/:directory/artist")
-    public readArtistDirectory(req: express.Request): DirectoryResult {
-
-        return null;
-    }
 }
 
 export default ID3TagController;
