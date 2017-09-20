@@ -134,13 +134,12 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
+            sut.ReadTagsDirectory("foo", "*", (tags) => {
 
                 expect((<sinon.SinonStub>fileSystemMock.ReadFile).callCount).to.equal(2);
                 done();
             });
         });
-
 
         it("should get tags when files read", (done) => {
 
@@ -151,7 +150,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
+            sut.ReadTagsDirectory("foo", "*", (tags) => {
 
                 expect((<sinon.SinonStub>repositoryMock.ReadTags).callCount).to.equal(2);
                 done();
@@ -167,7 +166,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
+            sut.ReadTagsDirectory("foo", "*", (tags) => {
 
                 expect(tags).to.not.be.null;
                 expect(tags.length).to.equal(2);

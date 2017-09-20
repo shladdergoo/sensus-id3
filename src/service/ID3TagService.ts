@@ -1,5 +1,6 @@
 /* tslint:disable:align */
 import { inject, injectable } from "inversify";
+import * as path from "path";
 import "reflect-metadata";
 
 import IFileSystem from "../interface/IFileSystem";
@@ -45,9 +46,13 @@ class ID3TagService implements IID3TagService {
             if (err) { throw err; }
 
             if (files === null || files.length === 0) {
+
                 callback(null);
             } else {
-                callback(this.GetFilesTags(files));
+                this.GetFilesTags(directory, files, (tagBags) => {
+
+                    callback(tagBags);
+                });
             }
         });
     }
@@ -84,27 +89,47 @@ class ID3TagService implements IID3TagService {
         return null;
     }
 
-    private GetFilesTags(files: string[]): TagBag[] {
+    private GetFilesTags(directory: string, files: string[], callback: (response: TagBag[]) => void): void {
 
-        let tagBag = new Array<TagBag>();
+        let tagBags = new Array<TagBag>();
+        let targetBagsSize: number = files.length;
 
         files.forEach(filename => {
 
-            this._fileSystem.ReadFile(filename, (readErr, data) => {
+            this.GetFileTags(directory, filename, (err, tagBag) => {
 
-                if (!readErr && data !== null && data.length > 0) {
-
-                    this._id3TagRepository.ReadTags(data, filename, (tagsErr, tags) => {
-
-                        if (!tagsErr && tags !== null) {
-                            tagBag.push(tags);
-                        }
-                    });
+                if (err) {
+                    targetBagsSize--;
+                    if (tagBags.length === targetBagsSize) { callback(tagBags); }
+                } else {
+                    tagBags.push(tagBag);
+                    if (tagBags.length === targetBagsSize) { callback(tagBags); }
                 }
             });
         });
+    }
 
-        return tagBag;
+    private GetFileTags(directory: string, filename: string,
+        callback: (err: NodeJS.ErrnoException, response: TagBag) => void): void {
+
+        let fullFilename: string = path.join(directory, filename);
+        this._fileSystem.ReadFile(fullFilename, (readErr, data) => {
+
+            if (!readErr && data !== null && data.length > 0) {
+
+                this._id3TagRepository.ReadTags(data, filename, (tagsErr, tags) => {
+
+                    if (!tagsErr && tags !== null) {
+
+                        callback(null, tags);
+                    } else {
+                        callback(new Error("Error reading tags"), null);
+                    }
+                });
+            } else {
+                callback(new Error("Error reading file"), null);
+            }
+        });
     }
 
     private GetFilesTagsSync(files: string[]): TagBag[] {

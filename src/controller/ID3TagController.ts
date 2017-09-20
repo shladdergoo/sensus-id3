@@ -62,6 +62,19 @@ export class ID3TagController implements interfaces.Controller {
             res.send(JSON.stringify(tagResult));
         });
     }
+
+    // http://127.0.0.1:3000/api/v1/id3tag/C%3A%5Ctemp/mp3/tags
+    @Get("/:directory/:extension/tags")
+    public readTagsDirectory(req: express.Request, res: express.Response) {
+
+        this._id3TagService.ReadTagsDirectory(req.params.directory, req.params.extension, (readResult) => {
+
+            let tagResult: TagResult = { returnValue: "", success: true, tags: readResult };
+
+            res.setHeader("Content-Type", "application/json");
+            res.send(JSON.stringify(tagResult));
+        });
+    }
 }
 
 export default ID3TagController;
