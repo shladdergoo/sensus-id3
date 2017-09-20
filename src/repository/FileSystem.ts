@@ -17,6 +17,11 @@ class FileSystem implements IFileSystem {
 
         return fs.readdirSync(directory);
     }
+
+    public ReadFile(filename: string, callback: (err: NodeJS.ErrnoException, data: Buffer) => void): void {
+
+        fs.readFile(filename, callback);
+    }
 }
 
 export default FileSystem;
