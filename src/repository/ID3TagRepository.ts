@@ -39,7 +39,7 @@ class ID3TagRepository implements IID3TagRepository {
     }
 
     // tslint:disable-next-line:no-empty
-    public ReadTags(filename: string, callback: (err: Error, tags: TagBag) => void): void {
+    public ReadTags(file: Buffer, filename: string, callback: (err: Error, tags: TagBag) => void): void {
     }
 
     public ReadTagsSync(filename: string): TagBag {

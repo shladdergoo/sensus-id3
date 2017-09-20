@@ -23,9 +23,19 @@ class ID3TagService implements IID3TagService {
         this._fileSystem = fileSystem;
     }
 
-    public ReadTags(filename: string): TagBag {
+    public ReadTags(filename: string, callback: (response: TagBag) => void): void {
 
-        return this._id3TagRepository.ReadTagsSync(filename);
+        this._fileSystem.ReadFile(filename, (readErr, data) => {
+
+            if (readErr) { throw readErr; }
+
+            if (data == null || data.length === 0) { callback(null); }
+
+            this._id3TagRepository.ReadTags(data, filename, (tagsErr, tags) => {
+
+                callback(tags);
+            });
+        });
     }
 
     public ReadArtist(filename: string): string {
@@ -83,14 +93,19 @@ class ID3TagService implements IID3TagService {
 
         let tagBag = new Array<TagBag>();
 
-        files.forEach(file => {
+        files.forEach(filename => {
 
-            this._id3TagRepository.ReadTags(file, (err, tags) => {
+            this._fileSystem.ReadFile(filename, (readErr, data) => {
 
-                if (!err && tags !== null) {
-                    tagBag.push(tags);
+                if (!readErr && data !== null && data.length > 0) {
+
+                    this._id3TagRepository.ReadTags(data, filename, (tagsErr, tags) => {
+
+                        if (!tagsErr && tags !== null) {
+                            tagBag.push(tags);
+                        }
+                    });
                 }
-
             });
         });
 
