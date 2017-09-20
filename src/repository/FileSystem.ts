@@ -9,10 +9,16 @@ import * as fs from "fs";
 class FileSystem implements IFileSystem {
 
     public GetDirectoryFiles(directory: string,
-        filePattern: string,
+        fileExtention: string,
         callback: (err: NodeJS.ErrnoException, files: string[]) => void): void {
 
-        fs.readdir(directory, callback);
+        fs.readdir(directory, (err, files) => {
+
+            callback(err, files.filter((value, index, array) => {
+
+                    return (value.endsWith(fileExtention));
+            }));
+        });
     }
 
     public GetDirectoryFilesSync(directory: string): string[] {
