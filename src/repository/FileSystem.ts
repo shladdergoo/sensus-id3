@@ -8,7 +8,9 @@ import * as fs from "fs";
 @injectable()
 class FileSystem implements IFileSystem {
 
-    public GetDirectoryFiles(directory: string, callback: (err: NodeJS.ErrnoException, files: string[]) => void): void {
+    public GetDirectoryFiles(directory: string,
+        filePattern: string,
+        callback: (err: NodeJS.ErrnoException, files: string[]) => void): void {
 
         fs.readdir(directory, callback);
     }

@@ -27,7 +27,7 @@ describe("FileSystem", () => {
 
             let sut = new FileSystem();
 
-            sut.GetDirectoryFiles("C:\\temp", (err, files) => {
+            sut.GetDirectoryFiles("C:\\temp", "*.mp3", (err, files) => {
 
                 expect(err).to.be.null;
                 expect(files).to.not.be.null;

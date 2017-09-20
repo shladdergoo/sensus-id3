@@ -38,9 +38,9 @@ class ID3TagService implements IID3TagService {
         });
     }
 
-    public ReadTagsDirectory(directory: string, callback: (response: TagBag[]) => void): void {
+    public ReadTagsDirectory(directory: string, filePattern: string, callback: (response: TagBag[]) => void): void {
 
-        this._fileSystem.GetDirectoryFiles(directory, (err, files) => {
+        this._fileSystem.GetDirectoryFiles(directory, filePattern, (err, files) => {
 
             if (err) { throw err; }
 

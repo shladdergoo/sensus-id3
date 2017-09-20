@@ -1,6 +1,6 @@
+import * as chai from "chai";
 import "mocha";
 import "mocha-sinon";
-import * as chai from "chai";
 import * as sinon from "sinon";
 
 import IFileSystem from "../src/interface/IFileSystem";
@@ -93,7 +93,7 @@ describe("ID3TagService", () => {
 
             expect(() => {
 
-                sut.ReadTagsDirectory("foo", (tags) => {
+                sut.ReadTagsDirectory("foo", "*.*", (tags) => {
                 });
             }).to.throw("Foo");
 
@@ -106,7 +106,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", (tags) => {
+            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
 
                 expect(tags).to.be.null;
                 done();
@@ -119,7 +119,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", (tags) => {
+            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
 
                 expect(tags).to.be.null;
                 done();
@@ -134,7 +134,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", (tags) => {
+            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
 
                 expect((<sinon.SinonStub>fileSystemMock.ReadFile).callCount).to.equal(2);
                 done();
@@ -151,7 +151,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", (tags) => {
+            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
 
                 expect((<sinon.SinonStub>repositoryMock.ReadTags).callCount).to.equal(2);
                 done();
@@ -167,7 +167,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", (tags) => {
+            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
 
                 expect(tags).to.not.be.null;
                 expect(tags.length).to.equal(2);
