@@ -1,0 +1,53 @@
+{
+    "returnValue": "",
+    "success": true,
+    "tags": {
+        "filename": "C:\\temp\\02 Drone Strike.mp3",
+        "tags": [
+            {
+                "tagName": "album",
+                "tagValue": "Trick"
+            },
+            {
+                "tagName": "artist",
+                "tagValue": "Jamie T"
+            },
+            {
+                "tagName": "band",
+                "tagValue": "Foo"
+            },
+            {
+                "tagName": "comments",
+                "tagValue": " 00001C7F 000019DA 00009065 00006F45 00030663 0000D5C6 0000860B 000085B5 00017C4E 00013100"
+            },
+            {
+                "tagName": "composer",
+                "tagValue": "James Dring/Jamie T"
+            },
+            {
+                "tagName": "set-part",
+                "tagValue": "1/1\u0000"
+            },
+            {
+                "tagName": "encoder",
+                "tagValue": "iTunes 12.5.1.21"
+            },
+            {
+                "tagName": "genre",
+                "tagValue": "Indie Rock"
+            },
+            {
+                "tagName": "title",
+                "tagValue": "Drone Strike"
+            },
+            {
+                "tagName": "track",
+                "tagValue": "2/12\u0000"
+            },
+            {
+                "tagName": "year",
+                "tagValue": "2016\u0000"
+            }
+        ]
+    }
+}

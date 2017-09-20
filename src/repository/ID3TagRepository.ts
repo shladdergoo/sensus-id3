@@ -32,14 +32,23 @@ class ID3TagRepository implements IID3TagRepository {
     }
 
     private _nodeId3: any;
+    private _id3Parser: any;
 
     public constructor() {
 
         this._nodeId3 = require("node-id3");
+        this._id3Parser = require("id3-parser");
     }
 
     // tslint:disable-next-line:no-empty
     public ReadTags(file: Buffer, filename: string, callback: (err: Error, tags: TagBag) => void): void {
+
+        this._id3Parser.parse(file).then((result: any) => {
+
+            let tagBag: TagBag = ID3TagRepository.BuildTagBag(filename, result);
+
+            callback(null, tagBag);
+        });
     }
 
     public ReadTagsSync(filename: string): TagBag {
