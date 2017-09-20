@@ -15,7 +15,7 @@ describe("ID3Repository", () => {
 
             let sut = new ID3TagRepository();
 
-            let result = sut.ReadTags("D:\\temp\\02 Drone Strike.mp3");
+            let result = sut.ReadTagsSync("D:\\temp\\02 Drone Strike.mp3");
 
             expect(result).to.not.be.null;
         });

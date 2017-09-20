@@ -38,7 +38,11 @@ class ID3TagRepository implements IID3TagRepository {
         this._nodeId3 = require("node-id3");
     }
 
-    public ReadTags(filename: string): TagBag {
+    // tslint:disable-next-line:no-empty
+    public ReadTags(filename: string, callback: (err: Error, tags: TagBag) => void): void {
+    }
+
+    public ReadTagsSync(filename: string): TagBag {
 
         let tags;
         try {
