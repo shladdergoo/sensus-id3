@@ -54,7 +54,9 @@ export class ID3TagController implements interfaces.Controller {
 
         this._id3TagService.ReadTags(req.params.filename, (readResult) => {
 
-            let tagResult: TagResult = {returnValue: "", success: true, tags: readResult};
+            let tagBags: TagBag[] = new Array<TagBag>();
+            tagBags.push(readResult);
+            let tagResult: TagResult = { returnValue: "", success: true, tags: tagBags };
 
             res.setHeader("Content-Type", "application/json");
             res.send(JSON.stringify(tagResult));
