@@ -42,12 +42,6 @@ export class ID3TagController implements interfaces.Controller {
         return { returnValue: null, success: result, tags: null };
     }
 
-    @Put("/dir/:directory/artist/:artistValue")
-    public writeArtistDirectory(req: express.Request): DirectoryResult {
-
-        return null;
-    }
-
     // http://127.0.0.1:3000/api/v1/id3tag/C%3A%5Ctemp%5C02%20Drone%20Strike.mp3/tags
     @Get("/:filename/tags")
     public readTags(req: express.Request, res: express.Response) {
