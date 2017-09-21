@@ -107,9 +107,9 @@ class ID3TagService implements IID3TagService {
 
         let parsedPath: path.ParsedPath = path.parse(filename);
         let dir: string = parsedPath.dir;
-        let root: string = parsedPath.root;
+        let base: string = parsedPath.base;
 
-        this.GetDirectoryFileTags(dir, root, callback);
+        this.GetDirectoryFileTags(dir, base, callback);
     }
 
     private GetDirectoryFileTags(directory: string, fileShortName: string,
