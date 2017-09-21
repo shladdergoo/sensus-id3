@@ -26,16 +26,9 @@ class ID3TagService implements IID3TagService {
 
     public ReadTags(filename: string, callback: (response: TagBag) => void): void {
 
-        this._fileSystem.ReadFile(filename, (readErr, data) => {
+        this.GetFileTags(filename, (err, tags) => {
 
-            if (readErr) { throw readErr; }
-
-            if (data == null || data.length === 0) { callback(null); }
-
-            this._id3TagRepository.ReadTags(data, filename, (tagsErr, tags) => {
-
-                callback(tags);
-            });
+            callback(tags);
         });
     }
 
@@ -96,7 +89,7 @@ class ID3TagService implements IID3TagService {
 
         files.forEach(filename => {
 
-            this.GetFileTags(directory, filename, (err, tagBag) => {
+            this.GetDirectoryFileTags(directory, filename, (err, tagBag) => {
 
                 if (err) {
                     targetBagsSize--;
@@ -109,15 +102,25 @@ class ID3TagService implements IID3TagService {
         });
     }
 
-    private GetFileTags(directory: string, filename: string,
+    private GetFileTags(filename: string,
         callback: (err: NodeJS.ErrnoException, response: TagBag) => void): void {
 
-        let fullFilename: string = path.join(directory, filename);
+        let parsedPath: path.ParsedPath = path.parse(filename);
+        let dir: string = parsedPath.dir;
+        let root: string = parsedPath.root;
+
+        this.GetDirectoryFileTags(dir, root, callback);
+    }
+
+    private GetDirectoryFileTags(directory: string, fileShortName: string,
+        callback: (err: NodeJS.ErrnoException, response: TagBag) => void): void {
+
+        let fullFilename: string = path.join(directory, fileShortName);
         this._fileSystem.ReadFile(fullFilename, (readErr, data) => {
 
             if (!readErr && data !== null && data.length > 0) {
 
-                this._id3TagRepository.ReadTags(data, filename, (tagsErr, tags) => {
+                this._id3TagRepository.ReadTags(data, fileShortName, (tagsErr, tags) => {
 
                     if (!tagsErr && tags !== null) {
 
