@@ -5,7 +5,6 @@ import * as sinon from "sinon";
 
 import IFileSystem from "../src/interface/IFileSystem";
 import IID3TagRepository from "../src/interface/IID3TagRepository";
-import IID3TagService from "../src/interface/IID3TagService";
 import ID3TagService from "../src/service/ID3TagService";
 
 import TagBag from "../src/model/TagBag";
