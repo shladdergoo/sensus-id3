@@ -14,6 +14,12 @@ const expect = chai.expect;
 describe("ID3TagController", () => {
 
     let id3TagServiceMock: IID3TagService = <IID3TagService>{};
+    const request = {
+        params: {
+            filename: "foo"
+        },
+    }
+    let req: any = mockReq(request);
     let res: any = mockRes();
 
     beforeEach(() => {
@@ -26,13 +32,6 @@ describe("ID3TagController", () => {
 
         it("return result when it gets result", () => {
 
-            const request = {
-                params: {
-                    filename: "foo"
-                },
-            }
-
-            let req: any = mockReq(request);
             id3TagServiceMock.ReadTags = sinon.stub().yields(new TagBag());
 
             let sut: ID3TagController = new ID3TagController(id3TagServiceMock);
