@@ -40,7 +40,6 @@ class ID3TagRepository implements IID3TagRepository {
         this._id3Parser = require("id3-parser");
     }
 
-    // tslint:disable-next-line:no-empty
     public ReadTags(file: Buffer, filename: string, callback: (err: Error, tags: TagBag) => void): void {
 
         this._id3Parser.parse(file).then((result: any) => {

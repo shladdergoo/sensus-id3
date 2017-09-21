@@ -1,4 +1,3 @@
-/* tslint:disable:align */
 import { inject, injectable } from "inversify";
 import * as path from "path";
 import "reflect-metadata";
@@ -60,11 +59,6 @@ class ID3TagService implements IID3TagService {
         }
 
         return this.GetFilesTagsSync(files);
-    }
-
-    public ReadArtistDirectory(directory: string): string[] {
-
-        return null;
     }
 
     public WriteTags(filename: string, tags: TagBag): boolean {
