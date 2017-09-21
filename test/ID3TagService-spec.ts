@@ -20,8 +20,16 @@ describe("ID3TagService", () => {
 
         it("should return tags", (done) => {
 
-            expect(1).to.equal(1);
-            done();
+            fileSystemMock.ReadFile = sinon.stub().yields(null, new Buffer(99));
+            repositoryMock.ReadTags = sinon.stub().yields(null, new Array<TagBag>());
+
+            let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
+
+            sut.ReadTags("foo", (tags) => {
+
+                expect(tags).to.not.be.null;
+                done();
+            });
         });
     });
 
