@@ -31,7 +31,7 @@ class FileSystem implements IFileSystem {
         fs.readFile(filename, callback);
     }
 
-    public readFilePromise(filename: string): Promise<any> {
+    public readFilePromise(filename: string): Promise<Buffer> {
 
         return new Promise((resolve, reject) => {
 

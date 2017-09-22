@@ -5,7 +5,7 @@ interface IFileSystem {
         callback: (err: NodeJS.ErrnoException, files: string[]) => void): void;
     getDirectoryFilesSync(directory: string): string[];
     readFile(filename: string, callback: (err: NodeJS.ErrnoException, data: Buffer) => void): void;
-    readFilePromise(filename: string): Promise<any>;
+    readFilePromise(filename: string): Promise<Buffer>;
 }
 
 export default IFileSystem;

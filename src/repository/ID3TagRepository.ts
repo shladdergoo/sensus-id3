@@ -19,7 +19,7 @@ class ID3TagRepository implements IID3TagRepository {
 
             let tagValue: string;
             tagValue = tags[name];
-            if (typeof(tagValue) === "string") {
+            if (typeof (tagValue) === "string") {
 
                 let tag = new Tag();
                 tag.tagName = name;
@@ -47,6 +47,14 @@ class ID3TagRepository implements IID3TagRepository {
             let tagBag: TagBag = ID3TagRepository.buildTagBag(filename, result);
 
             callback(null, tagBag);
+        });
+    }
+
+    public readTagsPromise(file: Buffer, filename: string): Promise<TagBag> {
+
+        return this._id3Parser.parse(file).then((result: any) => {
+
+            return ID3TagRepository.buildTagBag(filename, result);
         });
     }
 
