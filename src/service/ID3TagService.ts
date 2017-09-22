@@ -31,6 +31,11 @@ class ID3TagService implements IID3TagService {
         });
     }
 
+    public readTagsPromise(filename: string): Promise<TagBag> {
+
+        return this.getFileTagsPromise(filename);
+    }
+
     public ReadTagsDirectory(directory: string, fileExtention: string, callback: (response: TagBag[]) => void): void {
 
         this._fileSystem.getDirectoryFiles(directory, fileExtention, (err, files) => {
@@ -94,6 +99,15 @@ class ID3TagService implements IID3TagService {
                 }
             });
         });
+    }
+
+    private getFileTagsPromise(filename: string): Promise<TagBag> {
+
+        return this._fileSystem.readFilePromise(filename)
+            .then((buffer) => {
+
+                return this._id3TagRepository.readTagsPromise(buffer, filename);
+            });
     }
 
     private GetFileTags(filename: string,
