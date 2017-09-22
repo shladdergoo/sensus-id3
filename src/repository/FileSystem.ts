@@ -16,7 +16,7 @@ class FileSystem implements IFileSystem {
 
             callback(err, files.filter((value, index, array) => {
 
-                    return (value.endsWith(fileExtention));
+                return (value.endsWith(fileExtention));
             }));
         });
     }
@@ -29,6 +29,21 @@ class FileSystem implements IFileSystem {
     public ReadFile(filename: string, callback: (err: NodeJS.ErrnoException, data: Buffer) => void): void {
 
         fs.readFile(filename, callback);
+    }
+
+    public readFilePromise(filename: string): Promise<any> {
+
+        return new Promise((resolve, reject) => {
+
+            fs.readFile(filename, (err, data) => {
+
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
     }
 }
 
