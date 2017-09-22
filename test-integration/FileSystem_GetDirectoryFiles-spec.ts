@@ -1,5 +1,5 @@
-import "mocha";
 import * as chai from "chai";
+import "mocha";
 
 import FileSystem from "../src/repository/FileSystem";
 
@@ -13,7 +13,7 @@ describe("FileSystem", () => {
 
             let sut = new FileSystem();
 
-            let result = sut.GetDirectoryFilesSync("C:\\temp");
+            let result = sut.getDirectoryFilesSync("C:\\temp");
 
             expect(result).to.not.be.undefined;
             expect(result).to.not.be.null;
@@ -27,7 +27,7 @@ describe("FileSystem", () => {
 
             let sut = new FileSystem();
 
-            sut.GetDirectoryFiles("C:\\temp", "*.mp3", (err, files) => {
+            sut.getDirectoryFiles("C:\\temp", "*.mp3", (err, files) => {
 
                 expect(err).to.be.null;
                 expect(files).to.not.be.null;

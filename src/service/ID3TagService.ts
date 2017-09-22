@@ -33,7 +33,7 @@ class ID3TagService implements IID3TagService {
 
     public ReadTagsDirectory(directory: string, fileExtention: string, callback: (response: TagBag[]) => void): void {
 
-        this._fileSystem.GetDirectoryFiles(directory, fileExtention, (err, files) => {
+        this._fileSystem.getDirectoryFiles(directory, fileExtention, (err, files) => {
 
             if (err) { throw err; }
 
@@ -52,7 +52,7 @@ class ID3TagService implements IID3TagService {
     public ReadTagsDirectorySync(directory: string): TagBag[] {
 
         let files: string[];
-        files = this._fileSystem.GetDirectoryFilesSync(directory);
+        files = this._fileSystem.getDirectoryFilesSync(directory);
 
         if (files === null || files.length === 0) {
             return null;
@@ -110,7 +110,7 @@ class ID3TagService implements IID3TagService {
         callback: (err: NodeJS.ErrnoException, response: TagBag) => void): void {
 
         let fullFilename: string = path.join(directory, fileShortName);
-        this._fileSystem.ReadFile(fullFilename, (readErr, data) => {
+        this._fileSystem.readFile(fullFilename, (readErr, data) => {
 
             if (!readErr && data !== null && data.length > 0) {
 
