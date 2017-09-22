@@ -15,7 +15,6 @@ TODO: Write usage instructions
 ## Tests
 
 gulp test
-npm run jest
 
 ## Contributing
 
