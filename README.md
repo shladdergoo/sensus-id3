@@ -41,3 +41,4 @@ KB
 
 https://www.sitepoint.com/promises-in-javascript-unit-tests-the-definitive-guide/
 https://basarat.gitbooks.io/typescript/docs/promise.html
+https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines
