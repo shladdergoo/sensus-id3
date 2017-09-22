@@ -9,7 +9,7 @@ import TagBag from "../model/TagBag";
 @injectable()
 class ID3TagRepository implements IID3TagRepository {
 
-    private static BuildTagBag(filename: string, tags: any): TagBag {
+    private static buildTagBag(filename: string, tags: any): TagBag {
 
         let tagBag = new TagBag();
         tagBag.filename = filename;
@@ -40,17 +40,17 @@ class ID3TagRepository implements IID3TagRepository {
         this._id3Parser = require("id3-parser");
     }
 
-    public ReadTags(file: Buffer, filename: string, callback: (err: Error, tags: TagBag) => void): void {
+    public readTags(file: Buffer, filename: string, callback: (err: Error, tags: TagBag) => void): void {
 
         this._id3Parser.parse(file).then((result: any) => {
 
-            let tagBag: TagBag = ID3TagRepository.BuildTagBag(filename, result);
+            let tagBag: TagBag = ID3TagRepository.buildTagBag(filename, result);
 
             callback(null, tagBag);
         });
     }
 
-    public ReadTagsSync(filename: string): TagBag {
+    public readTagsSync(filename: string): TagBag {
 
         let tags;
         try {
@@ -59,10 +59,10 @@ class ID3TagRepository implements IID3TagRepository {
             return null;
         }
 
-        return ID3TagRepository.BuildTagBag(filename, tags);
+        return ID3TagRepository.buildTagBag(filename, tags);
     }
 
-    public WriteArtist(filename: string, artistValue: string): boolean {
+    public writeArtist(filename: string, artistValue: string): boolean {
 
         let tags = {
             artist: artistValue

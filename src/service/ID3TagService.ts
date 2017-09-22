@@ -68,7 +68,7 @@ class ID3TagService implements IID3TagService {
 
     public WriteArtist(filename: string, artistValue: string): boolean {
 
-        return this._id3TagRepository.WriteArtist(filename, artistValue);
+        return this._id3TagRepository.writeArtist(filename, artistValue);
     }
 
     public WriteArtistDirectory(directory: string, artistValue: string): boolean {
@@ -114,7 +114,7 @@ class ID3TagService implements IID3TagService {
 
             if (!readErr && data !== null && data.length > 0) {
 
-                this._id3TagRepository.ReadTags(data, fileShortName, (tagsErr, tags) => {
+                this._id3TagRepository.readTags(data, fileShortName, (tagsErr, tags) => {
 
                     if (!tagsErr && tags !== null) {
 
@@ -135,7 +135,7 @@ class ID3TagService implements IID3TagService {
 
         files.forEach(file => {
 
-            let tags = this._id3TagRepository.ReadTagsSync(file);
+            let tags = this._id3TagRepository.readTagsSync(file);
             if (tags !== null) {
                 tagBag.push(tags);
             }

@@ -2,9 +2,9 @@ import TagBag from "../model/TagBag";
 
 interface IID3TagRepository {
 
-    ReadTags(file: Buffer, filename: string, callback: (err: Error, tags: TagBag) => void): void;
-    ReadTagsSync(filename: string): TagBag;
-    WriteArtist(filename: string, artistValue: string): boolean;
+    readTags(file: Buffer, filename: string, callback: (err: Error, tags: TagBag) => void): void;
+    readTagsSync(filename: string): TagBag;
+    writeArtist(filename: string, artistValue: string): boolean;
 }
 
 export default IID3TagRepository;

@@ -4,8 +4,6 @@ import "mocha";
 
 import ID3TagRepository from "../src/repository/ID3TagRepository";
 
-import TagBag from "../src/model/TagBag";
-
 const expect = chai.expect;
 
 describe("ID3Repository", () => {
@@ -20,7 +18,7 @@ describe("ID3Repository", () => {
 
             let sut = new ID3TagRepository();
 
-            sut.ReadTags(buffer, filename, (err, tags) => {
+            sut.readTags(buffer, filename, (err, tags) => {
 
                 expect(tags).to.not.be.null;
                 done();
