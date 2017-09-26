@@ -36,7 +36,7 @@ export class ID3TagController implements interfaces.Controller {
 
         let result: boolean;
 
-        result = this._id3TagService.WriteArtist(req.params.filename,
+        result = this._id3TagService.writeArtist(req.params.filename,
             req.params.artistValue);
 
         return { returnValue: null, success: result, tags: null };
@@ -46,7 +46,7 @@ export class ID3TagController implements interfaces.Controller {
     @Get("/:filename/tags")
     public readTags(req: express.Request, res: express.Response) {
 
-        this._id3TagService.ReadTags(req.params.filename, (readResult) => {
+        this._id3TagService.readTags(req.params.filename, (readResult) => {
 
             let tagBags: TagBag[] = new Array<TagBag>();
             tagBags.push(readResult);
@@ -61,7 +61,7 @@ export class ID3TagController implements interfaces.Controller {
     @Get("/:directory/:extension/tags")
     public readTagsDirectory(req: express.Request, res: express.Response) {
 
-        this._id3TagService.ReadTagsDirectory(req.params.directory, req.params.extension, (readResult) => {
+        this._id3TagService.readTagsDirectory(req.params.directory, req.params.extension, (readResult) => {
 
             let tagResult: TagResult = { returnValue: "", success: true, tags: readResult };
 

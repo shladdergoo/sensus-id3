@@ -46,12 +46,12 @@ describe("ID3TagController", () => {
 
         it("returns result when it gets result", () => {
 
-            id3TagServiceMock.ReadTags = sinon.stub().yields(new TagBag());
+            id3TagServiceMock.readTags = sinon.stub().yields(new TagBag());
 
             let sut: ID3TagController = new ID3TagController(id3TagServiceMock);
             sut.readTags(req, res);
 
-            expect((<sinon.SinonStub>id3TagServiceMock.ReadTags).callCount).to.equal(1);
+            expect((<sinon.SinonStub>id3TagServiceMock.readTags).callCount).to.equal(1);
             let response: any = (<sinon.SinonStub>res.send).getCall(0).args[0];
             expect(response.tags).to.not.be.null;
         });
@@ -62,14 +62,14 @@ describe("ID3TagController", () => {
         it("returns result when it gets result", () => {
 
             let tagBags: TagBag[] = new Array<TagBag>();
-            tagBags.push(new TagBag);
+            tagBags.push(new TagBag());
 
-            id3TagServiceMock.ReadTagsDirectory = sinon.stub().yields(tagBags);
+            id3TagServiceMock.readTagsDirectory = sinon.stub().yields(tagBags);
 
             let sut: ID3TagController = new ID3TagController(id3TagServiceMock);
             sut.readTagsDirectory(req, res);
 
-            expect((<sinon.SinonStub>id3TagServiceMock.ReadTags).callCount).to.equal(1);
+            expect((<sinon.SinonStub>id3TagServiceMock.readTags).callCount).to.equal(1);
             let response: any = (<sinon.SinonStub>res.send).getCall(0).args[0];
             expect(response.tags).to.not.be.null;
         });

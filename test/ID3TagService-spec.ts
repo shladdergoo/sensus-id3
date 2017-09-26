@@ -43,7 +43,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTags("foo", (tags) => {
+            sut.readTags("foo", (tags) => {
 
                 expect(tags).to.not.be.null;
                 done();
@@ -61,7 +61,7 @@ describe("ID3TagService", () => {
 
             expect(() => {
 
-                sut.ReadTagsDirectory("foo", "*.*", (tags) => {
+                sut.readTagsDirectory("foo", "*.*", (tags) => {
                 });
             }).to.throw("Foo");
 
@@ -74,7 +74,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
+            sut.readTagsDirectory("foo", "*.*", (tags) => {
 
                 expect(tags).to.be.null;
                 done();
@@ -87,7 +87,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", "*.*", (tags) => {
+            sut.readTagsDirectory("foo", "*.*", (tags) => {
 
                 expect(tags).to.be.null;
                 done();
@@ -102,7 +102,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", "*", (tags) => {
+            sut.readTagsDirectory("foo", "*", (tags) => {
 
                 expect((<sinon.SinonStub>fileSystemMock.readFile).callCount).to.equal(2);
                 done();
@@ -118,7 +118,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", "*", (tags) => {
+            sut.readTagsDirectory("foo", "*", (tags) => {
 
                 expect((<sinon.SinonStub>repositoryMock.readTags).callCount).to.equal(2);
                 done();
@@ -134,7 +134,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.ReadTagsDirectory("foo", "*", (tags) => {
+            sut.readTagsDirectory("foo", "*", (tags) => {
 
                 expect(tags).to.not.be.null;
                 expect(tags.length).to.equal(2);
@@ -151,7 +151,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            sut.WriteArtist("foo", "bar");
+            sut.writeArtist("foo", "bar");
 
             expect((<sinon.SinonStub>repositoryMock.writeArtist).calledOnce).to.be.true;
         });
@@ -165,7 +165,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            let result = sut.ReadTagsDirectorySync("foo");
+            let result = sut.readTagsDirectorySync("foo");
 
             expect(result).to.be.null;
         });
@@ -176,7 +176,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            let result = sut.ReadTagsDirectorySync("foo");
+            let result = sut.readTagsDirectorySync("foo");
 
             expect(result).to.be.null;
         });
@@ -189,7 +189,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            let result = sut.ReadTagsDirectorySync("foo");
+            let result = sut.readTagsDirectorySync("foo");
 
             expect((<sinon.SinonStub>repositoryMock.readTagsSync).callCount).to.equal(2);
         });
@@ -203,7 +203,7 @@ describe("ID3TagService", () => {
 
             let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
 
-            let result = sut.ReadTagsDirectorySync("foo");
+            let result = sut.readTagsDirectorySync("foo");
 
             expect(result).to.not.be.null;
             expect(result.length).to.equal(2);

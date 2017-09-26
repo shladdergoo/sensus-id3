@@ -23,9 +23,9 @@ class ID3TagService implements IID3TagService {
         this._fileSystem = fileSystem;
     }
 
-    public ReadTags(filename: string, callback: (response: TagBag) => void): void {
+    public readTags(filename: string, callback: (response: TagBag) => void): void {
 
-        this.GetFileTags(filename, (err, tags) => {
+        this.getFileTags(filename, (err, tags) => {
 
             callback(tags);
         });
@@ -36,7 +36,7 @@ class ID3TagService implements IID3TagService {
         return this.getFileTagsPromise(filename);
     }
 
-    public ReadTagsDirectory(directory: string, fileExtention: string, callback: (response: TagBag[]) => void): void {
+    public readTagsDirectory(directory: string, fileExtention: string, callback: (response: TagBag[]) => void): void {
 
         this._fileSystem.getDirectoryFiles(directory, fileExtention, (err, files) => {
 
@@ -46,7 +46,7 @@ class ID3TagService implements IID3TagService {
 
                 callback(null);
             } else {
-                this.GetFilesTags(directory, files, (tagBags) => {
+                this.getFilesTags(directory, files, (tagBags) => {
 
                     callback(tagBags);
                 });
@@ -54,7 +54,7 @@ class ID3TagService implements IID3TagService {
         });
     }
 
-    public ReadTagsDirectorySync(directory: string): TagBag[] {
+    public readTagsDirectorySync(directory: string): TagBag[] {
 
         let files: string[];
         files = this._fileSystem.getDirectoryFilesSync(directory);
@@ -63,32 +63,32 @@ class ID3TagService implements IID3TagService {
             return null;
         }
 
-        return this.GetFilesTagsSync(files);
+        return this.getFilesTagsSync(files);
     }
 
-    public WriteTags(filename: string, tags: TagBag): boolean {
+    public writeTags(filename: string, tags: TagBag): boolean {
 
         return false;
     }
 
-    public WriteArtist(filename: string, artistValue: string): boolean {
+    public writeArtist(filename: string, artistValue: string): boolean {
 
         return this._id3TagRepository.writeArtist(filename, artistValue);
     }
 
-    public WriteArtistDirectory(directory: string, artistValue: string): boolean {
+    public writeArtistDirectory(directory: string, artistValue: string): boolean {
 
         return null;
     }
 
-    private GetFilesTags(directory: string, files: string[], callback: (response: TagBag[]) => void): void {
+    private getFilesTags(directory: string, files: string[], callback: (response: TagBag[]) => void): void {
 
         let tagBags = new Array<TagBag>();
         let targetBagsSize: number = files.length;
 
         files.forEach(filename => {
 
-            this.GetDirectoryFileTags(directory, filename, (err, tagBag) => {
+            this.getDirectoryFileTags(directory, filename, (err, tagBag) => {
 
                 if (err) {
                     targetBagsSize--;
@@ -110,17 +110,17 @@ class ID3TagService implements IID3TagService {
             });
     }
 
-    private GetFileTags(filename: string,
+    private getFileTags(filename: string,
         callback: (err: NodeJS.ErrnoException, response: TagBag) => void): void {
 
         let parsedPath: path.ParsedPath = path.parse(filename);
         let dir: string = parsedPath.dir;
         let base: string = parsedPath.base;
 
-        this.GetDirectoryFileTags(dir, base, callback);
+        this.getDirectoryFileTags(dir, base, callback);
     }
 
-    private GetDirectoryFileTags(directory: string, fileShortName: string,
+    private getDirectoryFileTags(directory: string, fileShortName: string,
         callback: (err: NodeJS.ErrnoException, response: TagBag) => void): void {
 
         let fullFilename: string = path.join(directory, fileShortName);
@@ -143,7 +143,7 @@ class ID3TagService implements IID3TagService {
         });
     }
 
-    private GetFilesTagsSync(files: string[]): TagBag[] {
+    private getFilesTagsSync(files: string[]): TagBag[] {
 
         let tagBag = new Array<TagBag>();
 
