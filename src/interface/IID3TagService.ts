@@ -2,6 +2,7 @@ import TagBag from "../model/TagBag";
 
 interface IID3TagService {
     ReadTags(filename: string, callback: (response: TagBag) => void): void;
+    readTagsPromise(filename: string): Promise<TagBag>;
     WriteTags(filename: string, tags: TagBag): boolean;
     WriteArtist(filename: string, artistValue: string): boolean;
     ReadTagsDirectory(directory: string, fileExtension: string, callback: (response: TagBag[]) => void): void;

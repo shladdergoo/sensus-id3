@@ -1,4 +1,5 @@
 import * as chai from "chai";
+import * as chaiAsPromised from "chai-as-promised";
 import "mocha";
 import "mocha-sinon";
 import * as sinon from "sinon";
@@ -13,8 +14,25 @@ const expect = chai.expect;
 
 describe("ID3TagService", () => {
 
+    chai.use(chaiAsPromised);
+
     let repositoryMock: IID3TagRepository = <IID3TagRepository>{};
     let fileSystemMock: IFileSystem = <IFileSystem>{};
+
+    describe("readTagsPromise", () => {
+
+        it("should return tags", () => {
+
+            fileSystemMock.readFilePromise = sinon.stub().returns(Promise.resolve(new Buffer(99)));
+            repositoryMock.readTagsPromise = sinon.stub().returns(Promise.resolve(new Array<TagBag>()));
+
+            let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
+
+            let result: Promise<TagBag> = sut.readTagsPromise("foo");
+
+            expect(result).to.eventually.be.not.null;
+        });
+    });
 
     describe("ReadTags", () => {
 

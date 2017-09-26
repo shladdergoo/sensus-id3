@@ -32,6 +32,7 @@
     "devDependencies": {
         "@types/body-parser": "0.0.33",
         "@types/chai": "3.4.30",
+        "@types/chai-as-promised": "^7.1.0",
         "@types/debug": "0.0.29",
         "@types/express": "^4.0.35",
         "@types/mocha": "2.2.29",
