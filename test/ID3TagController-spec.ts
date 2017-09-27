@@ -69,7 +69,7 @@ describe("ID3TagController", () => {
             let sut: ID3TagController = new ID3TagController(id3TagServiceMock);
             sut.readTagsDirectory(req, res);
 
-            expect((<sinon.SinonStub>id3TagServiceMock.readTags).callCount).to.equal(1);
+            expect((<sinon.SinonStub>id3TagServiceMock.readTagsDirectory).callCount).to.equal(1);
             let response: any = (<sinon.SinonStub>res.send).getCall(0).args[0];
             expect(response.tags).to.not.be.null;
         });
