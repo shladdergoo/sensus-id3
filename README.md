@@ -41,3 +41,6 @@ KB
 https://www.sitepoint.com/promises-in-javascript-unit-tests-the-definitive-guide/
 https://basarat.gitbooks.io/typescript/docs/promise.html
 https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines
+https://blog.jcoglan.com/2013/03/30/callbacks-are-imperative-promises-are-functional-nodes-biggest-missed-opportunity/
+https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9
+
