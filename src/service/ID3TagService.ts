@@ -36,6 +36,11 @@ class ID3TagService implements IID3TagService {
         return this.getFileTagsPromise(filename);
     }
 
+    public async readTagsAsync(filename: string): Promise<TagBag> {
+
+        return await this.getFileTagsAsync(filename);
+    }
+
     public readTagsDirectory(directory: string, fileExtention: string, callback: (response: TagBag[]) => void): void {
 
         this._fileSystem.getDirectoryFiles(directory, fileExtention, (err, files) => {
@@ -108,6 +113,13 @@ class ID3TagService implements IID3TagService {
 
                 return this._id3TagRepository.readTagsPromise(buffer, filename);
             });
+    }
+
+    private async getFileTagsAsync(filename: string): Promise<TagBag> {
+
+        let buffer: Buffer = await this._fileSystem.readFilePromise(filename);
+
+        return await this._id3TagRepository.readTagsPromise(buffer, filename);
     }
 
     private getFileTags(filename: string,

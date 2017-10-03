@@ -34,6 +34,21 @@ describe("ID3TagService", () => {
         });
     });
 
+    describe("readTagsAsync", () => {
+
+        it("should return tags", async () => {
+
+            fileSystemMock.readFilePromise = sinon.stub().returns(Promise.resolve(new Buffer(99)));
+            repositoryMock.readTagsPromise = sinon.stub().returns(Promise.resolve(new Array<TagBag>()));
+
+            let sut: ID3TagService = new ID3TagService(repositoryMock, fileSystemMock);
+
+            let result: TagBag = await sut.readTagsAsync("foo");
+
+            expect(result).to.not.be.null;
+        });
+    });
+
     describe("ReadTags", () => {
 
         it("should return tags", (done) => {
