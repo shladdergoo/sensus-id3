@@ -55,8 +55,12 @@ describe("ID3TagController", () => {
             sut.readTags(req, res);
 
             expect((<sinon.SinonStub>id3TagServiceMock.readTagsPromise).callCount).to.equal(1);
-            // let response: any = (<sinon.SinonStub>res.send).getCall(0).args[0];
-            // expect(response.tags).to.not.be.null;
+
+            return Promise.all([id3TagServiceMock.readTagsPromise])
+                .then(() => {
+                    let response: any = (<sinon.SinonStub>res.send).getCall(0).args[0];
+                    expect(response.tags).to.not.be.null;
+                });
         });
     });
 
