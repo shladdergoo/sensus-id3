@@ -58,6 +58,20 @@ export class ID3TagController implements interfaces.Controller {
             });
     }
 
+    // http://127.0.0.1:3000/api/v1/id3tag/C%3A%5Ctemp%5C02%20Drone%20Strike.mp3/tagsasync
+    @Get("/:filename/tagsasync")
+    public async readTagsAsync(req: express.Request, res: express.Response) {
+
+        let readResult: TagBag = await this._id3TagService.readTagsAsync(req.params.filename);
+
+        let tagBags: TagBag[] = new Array<TagBag>();
+        tagBags.push(readResult);
+        let tagResult: TagResult = { returnValue: "", success: true, tags: tagBags };
+
+        res.setHeader("Content-Type", "application/json");
+        res.send(JSON.stringify(tagResult));
+    }
+
     // http://127.0.0.1:3000/api/v1/id3tag/C%3A%5Ctemp/mp3/tags
     @Get("/:directory/:extension/tags")
     public readTagsDirectory(req: express.Request, res: express.Response) {

@@ -64,6 +64,25 @@ describe("ID3TagController", () => {
         });
     });
 
+    describe("readTagsAsync", () => {
+
+        it("returns result when it gets result", async () => {
+
+            let tagBags: TagBag[] = new Array<TagBag>();
+            tagBags.push(new TagBag());
+
+            id3TagServiceMock.readTagsAsync = sinon.stub().returns(Promise.resolve(tagBags));
+
+            let sut: ID3TagController = new ID3TagController(id3TagServiceMock);
+            await sut.readTagsAsync(req, res);
+
+            expect((<sinon.SinonStub>id3TagServiceMock.readTagsAsync).callCount).to.equal(1);
+
+            let response: any = (<sinon.SinonStub>res.send).getCall(0).args[0];
+            expect(response.tags).to.not.be.null;
+        });
+    });
+
     describe("readTagsDirectory", () => {
 
         it("returns result when it gets result", () => {
