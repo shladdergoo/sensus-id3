@@ -54,8 +54,6 @@ describe("ID3TagController", () => {
             let sut: ID3TagController = new ID3TagController(id3TagServiceMock);
             sut.readTags(req, res);
 
-            expect((<sinon.SinonStub>id3TagServiceMock.readTagsPromise).callCount).to.equal(1);
-
             return Promise.all([id3TagServiceMock.readTagsPromise])
                 .then(() => {
                     let response: any = (<sinon.SinonStub>res.send).getCall(0).args[0];
@@ -75,8 +73,6 @@ describe("ID3TagController", () => {
 
             let sut: ID3TagController = new ID3TagController(id3TagServiceMock);
             await sut.readTagsAsync(req, res);
-
-            expect((<sinon.SinonStub>id3TagServiceMock.readTagsAsync).callCount).to.equal(1);
 
             let response: any = (<sinon.SinonStub>res.send).getCall(0).args[0];
             expect(response.tags).to.not.be.null;
