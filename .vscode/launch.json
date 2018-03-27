@@ -16,7 +16,7 @@
             "name": "Launch Program",
             "program": "${workspaceRoot}\\dist\\src\\index.js",
             "outFiles": [
-                "${workspaceRoot}/out/**/*.js"
+                "${workspaceRoot}/dist/**/*.js"
             ]
         },
         {
@@ -32,6 +32,7 @@
                 "--colors",
                 "./dist/**/${fileBasenameNoExtension}.js"
             ],
+            "preLaunchTask": "gulp: build",
             "internalConsoleOptions": "openOnSessionStart",
             "sourceMaps": true,
             "outFiles": [
